@@ -1,4 +1,4 @@
-# nanoTabICL regression pretraining
+# nanoTabICL regression baseline: pretraining and evaluation
 
 Native PyTorch pretraining with **uv**, for a CUDA GPU on Linux or Apple's MPS
 GPU on macOS. This repository trains the baseline for the separate WSP regression
@@ -7,7 +7,7 @@ experiment. It does not run the WSP construction agent.
 ## Start on a GPU machine
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if needed,
-then clone this private repository using your authenticated GitHub account:
+then clone this public repository:
 
 ```sh
 git clone https://github.com/anditp/nanotabicl-pretraining.git
@@ -55,8 +55,9 @@ GPU. `training.jsonl` records `prior_and_transfer_seconds` and
 `optimization_seconds` so a CPU sampling bottleneck is visible. This first
 version does not use distributed training, mixed precision or a different model.
 
-No CTR23 dataset values, benchmark split files, caches or WSP weights are needed
-or included. Benchmark outcomes never select checkpoints. The final fixed-budget
+No CTR23 dataset values, caches or WSP weights are included. Public task
+metadata and official split indices are frozen for evaluation only; pretraining
+does not use them. Benchmark outcomes never select checkpoints. The final fixed-budget
 checkpoint is the primary baseline; this is local pretraining, not an official
 pretrained checkpoint or an upstream training-recipe reproduction claim.
 
@@ -74,8 +75,8 @@ timing, and records native-entrypoint provenance in each checkpoint. It does
 not alter the original training recipe or read OpenML data. OpenML is not a
 dependency of this native training environment.
 
-The existing WSP project, completed weights, frozen benchmark manifest, running
-Docker training and WSP sandbox remain separate from this repository.
+The WSP construction project and its completed weights remain separate. This
+repository adds evaluation of the pretrained baseline only.
 
 ## Checkpoints and resume
 
@@ -101,26 +102,61 @@ resume; PyTorch does not promise bitwise reproducibility between CPU and GPU.
 It resumes from the last completed native checkpoint and replays later work,
 without saving a partially applied update. Git ignores all generated checkpoints.
 
-## Bring the completed baseline back for comparison
+## Evaluate the pretrained baseline
 
-Copy the completed run directory, including `state.json`, `final.pt` and
-`native_provenance.json`, into the original project's `baselines/` directory:
+Evaluation is native and **baseline-only**. It compares the completed pretrained
+model with five published CTR23 learners: ranger, rpart, xgboost, cv_glmnet and
+gam. It does not load WSP weights or expose a WSP evaluation command.
+
+A separate locked uv project adds OpenML for evaluation without changing the
+training environment, training lock or checkpoint-resume fingerprints:
 
 ```sh
-# In the original nanoTabICL-regression project:
-python3 manage.py evaluate --wsp-run runs/20261122T151512Z-1d2ebe --baseline-run baselines/cuda-seed0
+uv sync --project evaluation --locked
+uv run --project evaluation --frozen python evaluate.py --baseline-run runs/cuda-seed0
 ```
 
-The unchanged evaluator verifies the preserved reference identity, model
-configuration, full 20,000-step budget and checkpoint checksum. The extra native
-provenance records the environment that produced the weights. Do not copy an
-unfinished checkpoint into place as the final baseline.
+The checkpoint must have completed the full 20,000-step training budget.
+Evaluation freezes a checksum-verified copy before loading it. By default it uses
+CPU float32, matching the reference protocol. To evaluate on your GPU instead,
+append `--device cuda` or `--device mps`; the selected device is recorded and
+must remain the same when resuming.
+
+The benchmark is the frozen **19-dataset CTR23 subset, 640 official splits**,
+selected from the 35-task suite using at most 10,000 total rows and 100 raw
+predictors. It is not a claim of evaluating the entire 35-dataset suite. Task
+IDs, dataset versions, target names, checksums and all repeats/folds are included
+under `experiment/benchmarks/frozen/`. These files contain metadata and row
+indices, not dataset feature or target values. OpenML downloads the actual data
+into an ignored local cache when evaluation starts.
+
+Every training row is retained as context. The fixed preprocessing is fitted
+on context rows only; target normalization is inverted before computing RMSE,
+MAE and R-squared in original units. Query batching uses the unchanged wrapper.
+Each dataset's RMSE is the arithmetic mean of official fold RMSEs, matching the
+published baseline aggregation. Cross-dataset comparisons use geometric means
+of paired RMSE ratios and normalized RMSE, rather than a mean of raw errors
+with incompatible units. Undefined constant-target metrics are counted.
+
+The output directory contains `scores.csv`, `summary.json`, per-fold metrics,
+predictions, train/test indices, checkpoint/source hashes, timing and sparsity.
+Published scores are the authors' results, not local reruns. Failed tasks/folds
+prevent a final aggregate; completed prediction files are checksummed for reuse.
+
+```sh
+uv run --project evaluation --frozen python evaluate.py --resume-evaluation evaluations/EVALUATION_ID
+```
+
+The final checkpoint retains compatibility with the original experiment through
+its preserved source identity and configuration. WSP construction/evaluation
+continues to live separately.
 
 ## Checks
 
 ```sh
 uv run --frozen python -B -m unittest -v test_native test_runtime
 uv run --frozen python preflight.py --device cuda
+uv run --project evaluation --frozen python -B -m unittest -v test_evaluation
 ```
 
 Tests cover frozen-source validation, accelerator selection, native adapter and
@@ -131,6 +167,10 @@ forward/backward/AdamW. It neither loads nor changes actual WSP weights.
 Verified here with uv 0.13.9 and Python 3.12.16: all six tests pass, and the
 full-backbone CPU preflight completes successfully. CUDA and MPS are unavailable
 to the editing session, so run the accelerator preflight on your training host.
+Evaluation tests use offline synthetic fixtures and cover incomplete-checkpoint
+rejection, failed-fold recovery, prediction reuse and published-score aggregation.
+All 12 training/evaluation tests pass; the evaluation integration tests use
+offline synthetic fixtures and do not claim a completed CTR23 benchmark run.
 Reference files retain their original bytes, including line endings, through
 Git attributes.
 

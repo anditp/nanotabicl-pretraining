@@ -1,0 +1,1349 @@
+{
+  "model_config": {
+    "max_classes": 0,
+    "out_dim": 1,
+    "embed_dim": 128,
+    "col_num_blocks": 3,
+    "row_num_blocks": 3,
+    "icl_num_blocks": 12,
+    "col_nhead": 8,
+    "row_nhead": 8,
+    "icl_nhead": 8,
+    "feature_group_size": 3,
+    "n_cls_cols": 4,
+    "n_cls_rows": 128
+  },
+  "shapes": {
+    "row_cls_tokens": [
+      1,
+      1,
+      4,
+      128
+    ],
+    "x_embed.weight": [
+      128,
+      3
+    ],
+    "x_embed.bias": [
+      128
+    ],
+    "y_embed_in.weight": [
+      128,
+      1
+    ],
+    "y_embed_in.bias": [
+      128
+    ],
+    "y_embed_icl.weight": [
+      512,
+      1
+    ],
+    "y_embed_icl.bias": [
+      512
+    ],
+    "col_blocks.0.inducing_vectors": [
+      1,
+      128,
+      128
+    ],
+    "col_blocks.0.tfm1.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.0.tfm1.in_proj_bias": [
+      384
+    ],
+    "col_blocks.0.tfm1.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.0.tfm1.out_proj.bias": [
+      128
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.base_mlp.2.weight": [
+      128,
+      64
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.base_mlp.2.bias": [
+      128
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.query_mlp.0.weight": [
+      64,
+      16
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.query_mlp.2.weight": [
+      16,
+      64
+    ],
+    "col_blocks.0.tfm1.ssmax_layer.query_mlp.2.bias": [
+      16
+    ],
+    "col_blocks.0.tfm1.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.0.tfm1.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.0.tfm1.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.0.tfm1.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.0.tfm1.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.0.tfm1.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.0.tfm1.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.0.tfm1.ln_mlp.bias": [
+      128
+    ],
+    "col_blocks.0.tfm2.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.0.tfm2.in_proj_bias": [
+      384
+    ],
+    "col_blocks.0.tfm2.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.0.tfm2.out_proj.bias": [
+      128
+    ],
+    "col_blocks.0.tfm2.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.0.tfm2.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.0.tfm2.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.0.tfm2.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.0.tfm2.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.0.tfm2.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.0.tfm2.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.0.tfm2.ln_mlp.bias": [
+      128
+    ],
+    "col_blocks.1.inducing_vectors": [
+      1,
+      128,
+      128
+    ],
+    "col_blocks.1.tfm1.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.1.tfm1.in_proj_bias": [
+      384
+    ],
+    "col_blocks.1.tfm1.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.1.tfm1.out_proj.bias": [
+      128
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.base_mlp.2.weight": [
+      128,
+      64
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.base_mlp.2.bias": [
+      128
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.query_mlp.0.weight": [
+      64,
+      16
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.query_mlp.2.weight": [
+      16,
+      64
+    ],
+    "col_blocks.1.tfm1.ssmax_layer.query_mlp.2.bias": [
+      16
+    ],
+    "col_blocks.1.tfm1.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.1.tfm1.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.1.tfm1.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.1.tfm1.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.1.tfm1.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.1.tfm1.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.1.tfm1.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.1.tfm1.ln_mlp.bias": [
+      128
+    ],
+    "col_blocks.1.tfm2.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.1.tfm2.in_proj_bias": [
+      384
+    ],
+    "col_blocks.1.tfm2.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.1.tfm2.out_proj.bias": [
+      128
+    ],
+    "col_blocks.1.tfm2.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.1.tfm2.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.1.tfm2.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.1.tfm2.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.1.tfm2.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.1.tfm2.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.1.tfm2.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.1.tfm2.ln_mlp.bias": [
+      128
+    ],
+    "col_blocks.2.inducing_vectors": [
+      1,
+      128,
+      128
+    ],
+    "col_blocks.2.tfm1.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.2.tfm1.in_proj_bias": [
+      384
+    ],
+    "col_blocks.2.tfm1.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.2.tfm1.out_proj.bias": [
+      128
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.base_mlp.2.weight": [
+      128,
+      64
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.base_mlp.2.bias": [
+      128
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.query_mlp.0.weight": [
+      64,
+      16
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.query_mlp.2.weight": [
+      16,
+      64
+    ],
+    "col_blocks.2.tfm1.ssmax_layer.query_mlp.2.bias": [
+      16
+    ],
+    "col_blocks.2.tfm1.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.2.tfm1.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.2.tfm1.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.2.tfm1.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.2.tfm1.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.2.tfm1.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.2.tfm1.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.2.tfm1.ln_mlp.bias": [
+      128
+    ],
+    "col_blocks.2.tfm2.in_proj_weight": [
+      384,
+      128
+    ],
+    "col_blocks.2.tfm2.in_proj_bias": [
+      384
+    ],
+    "col_blocks.2.tfm2.out_proj.weight": [
+      128,
+      128
+    ],
+    "col_blocks.2.tfm2.out_proj.bias": [
+      128
+    ],
+    "col_blocks.2.tfm2.mlp.0.weight": [
+      256,
+      128
+    ],
+    "col_blocks.2.tfm2.mlp.0.bias": [
+      256
+    ],
+    "col_blocks.2.tfm2.mlp.2.weight": [
+      128,
+      256
+    ],
+    "col_blocks.2.tfm2.mlp.2.bias": [
+      128
+    ],
+    "col_blocks.2.tfm2.ln_attn.weight": [
+      128
+    ],
+    "col_blocks.2.tfm2.ln_attn.bias": [
+      128
+    ],
+    "col_blocks.2.tfm2.ln_mlp.weight": [
+      128
+    ],
+    "col_blocks.2.tfm2.ln_mlp.bias": [
+      128
+    ],
+    "row_blocks.0.in_proj_weight": [
+      384,
+      128
+    ],
+    "row_blocks.0.in_proj_bias": [
+      384
+    ],
+    "row_blocks.0.out_proj.weight": [
+      128,
+      128
+    ],
+    "row_blocks.0.out_proj.bias": [
+      128
+    ],
+    "row_blocks.0.mlp.0.weight": [
+      256,
+      128
+    ],
+    "row_blocks.0.mlp.0.bias": [
+      256
+    ],
+    "row_blocks.0.mlp.2.weight": [
+      128,
+      256
+    ],
+    "row_blocks.0.mlp.2.bias": [
+      128
+    ],
+    "row_blocks.0.ln_attn.weight": [
+      128
+    ],
+    "row_blocks.0.ln_attn.bias": [
+      128
+    ],
+    "row_blocks.0.ln_mlp.weight": [
+      128
+    ],
+    "row_blocks.0.ln_mlp.bias": [
+      128
+    ],
+    "row_blocks.1.in_proj_weight": [
+      384,
+      128
+    ],
+    "row_blocks.1.in_proj_bias": [
+      384
+    ],
+    "row_blocks.1.out_proj.weight": [
+      128,
+      128
+    ],
+    "row_blocks.1.out_proj.bias": [
+      128
+    ],
+    "row_blocks.1.mlp.0.weight": [
+      256,
+      128
+    ],
+    "row_blocks.1.mlp.0.bias": [
+      256
+    ],
+    "row_blocks.1.mlp.2.weight": [
+      128,
+      256
+    ],
+    "row_blocks.1.mlp.2.bias": [
+      128
+    ],
+    "row_blocks.1.ln_attn.weight": [
+      128
+    ],
+    "row_blocks.1.ln_attn.bias": [
+      128
+    ],
+    "row_blocks.1.ln_mlp.weight": [
+      128
+    ],
+    "row_blocks.1.ln_mlp.bias": [
+      128
+    ],
+    "row_blocks.2.in_proj_weight": [
+      384,
+      128
+    ],
+    "row_blocks.2.in_proj_bias": [
+      384
+    ],
+    "row_blocks.2.out_proj.weight": [
+      128,
+      128
+    ],
+    "row_blocks.2.out_proj.bias": [
+      128
+    ],
+    "row_blocks.2.mlp.0.weight": [
+      256,
+      128
+    ],
+    "row_blocks.2.mlp.0.bias": [
+      256
+    ],
+    "row_blocks.2.mlp.2.weight": [
+      128,
+      256
+    ],
+    "row_blocks.2.mlp.2.bias": [
+      128
+    ],
+    "row_blocks.2.ln_attn.weight": [
+      128
+    ],
+    "row_blocks.2.ln_attn.bias": [
+      128
+    ],
+    "row_blocks.2.ln_mlp.weight": [
+      128
+    ],
+    "row_blocks.2.ln_mlp.bias": [
+      128
+    ],
+    "icl_blocks.0.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.0.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.0.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.0.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.0.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.0.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.0.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.0.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.0.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.0.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.0.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.0.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.0.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.0.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.0.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.0.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.0.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.0.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.0.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.0.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.1.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.1.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.1.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.1.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.1.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.1.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.1.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.1.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.1.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.1.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.1.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.1.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.1.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.1.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.1.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.1.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.1.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.1.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.1.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.1.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.2.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.2.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.2.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.2.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.2.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.2.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.2.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.2.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.2.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.2.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.2.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.2.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.2.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.2.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.2.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.2.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.2.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.2.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.2.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.2.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.3.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.3.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.3.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.3.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.3.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.3.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.3.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.3.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.3.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.3.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.3.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.3.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.3.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.3.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.3.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.3.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.3.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.3.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.3.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.3.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.4.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.4.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.4.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.4.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.4.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.4.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.4.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.4.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.4.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.4.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.4.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.4.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.4.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.4.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.4.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.4.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.4.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.4.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.4.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.4.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.5.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.5.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.5.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.5.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.5.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.5.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.5.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.5.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.5.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.5.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.5.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.5.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.5.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.5.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.5.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.5.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.5.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.5.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.5.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.5.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.6.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.6.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.6.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.6.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.6.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.6.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.6.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.6.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.6.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.6.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.6.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.6.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.6.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.6.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.6.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.6.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.6.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.6.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.6.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.6.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.7.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.7.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.7.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.7.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.7.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.7.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.7.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.7.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.7.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.7.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.7.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.7.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.7.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.7.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.7.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.7.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.7.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.7.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.7.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.7.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.8.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.8.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.8.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.8.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.8.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.8.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.8.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.8.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.8.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.8.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.8.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.8.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.8.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.8.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.8.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.8.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.8.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.8.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.8.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.8.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.9.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.9.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.9.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.9.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.9.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.9.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.9.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.9.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.9.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.9.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.9.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.9.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.9.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.9.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.9.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.9.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.9.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.9.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.9.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.9.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.10.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.10.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.10.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.10.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.10.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.10.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.10.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.10.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.10.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.10.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.10.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.10.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.10.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.10.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.10.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.10.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.10.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.10.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.10.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.10.ln_mlp.bias": [
+      512
+    ],
+    "icl_blocks.11.in_proj_weight": [
+      1536,
+      512
+    ],
+    "icl_blocks.11.in_proj_bias": [
+      1536
+    ],
+    "icl_blocks.11.out_proj.weight": [
+      512,
+      512
+    ],
+    "icl_blocks.11.out_proj.bias": [
+      512
+    ],
+    "icl_blocks.11.ssmax_layer.base_mlp.0.weight": [
+      64,
+      1
+    ],
+    "icl_blocks.11.ssmax_layer.base_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.11.ssmax_layer.base_mlp.2.weight": [
+      512,
+      64
+    ],
+    "icl_blocks.11.ssmax_layer.base_mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.11.ssmax_layer.query_mlp.0.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.11.ssmax_layer.query_mlp.0.bias": [
+      64
+    ],
+    "icl_blocks.11.ssmax_layer.query_mlp.2.weight": [
+      64,
+      64
+    ],
+    "icl_blocks.11.ssmax_layer.query_mlp.2.bias": [
+      64
+    ],
+    "icl_blocks.11.mlp.0.weight": [
+      1024,
+      512
+    ],
+    "icl_blocks.11.mlp.0.bias": [
+      1024
+    ],
+    "icl_blocks.11.mlp.2.weight": [
+      512,
+      1024
+    ],
+    "icl_blocks.11.mlp.2.bias": [
+      512
+    ],
+    "icl_blocks.11.ln_attn.weight": [
+      512
+    ],
+    "icl_blocks.11.ln_attn.bias": [
+      512
+    ],
+    "icl_blocks.11.ln_mlp.weight": [
+      512
+    ],
+    "icl_blocks.11.ln_mlp.bias": [
+      512
+    ],
+    "row_ln.weight": [
+      128
+    ],
+    "row_ln.bias": [
+      128
+    ],
+    "out_ln.weight": [
+      512
+    ],
+    "out_ln.bias": [
+      512
+    ],
+    "out_mlp.0.weight": [
+      1024,
+      512
+    ],
+    "out_mlp.0.bias": [
+      1024
+    ],
+    "out_mlp.2.weight": [
+      1,
+      1024
+    ],
+    "out_mlp.2.bias": [
+      1
+    ]
+  },
+  "count": 27537265,
+  "constructor_verified": true,
+  "source_commit": "4a7f9c7648f05c3efb34555e088105405a707469"
+}

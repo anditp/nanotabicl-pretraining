@@ -1,10 +1,10 @@
 # nanoTabICL regression baseline: pretraining and evaluation
 
-Native PyTorch pretraining with **uv**, for a CUDA GPU on Linux or Apple's MPS
+Native PyTorch pretraining with **uv**, for a CUDA 12.1 GPU on Linux or Apple's MPS
 GPU on macOS. This repository trains the baseline for the separate WSP regression
 experiment. It does not run the WSP construction agent.
 
-## Start on a GPU machine
+## Start on a Linux CUDA 12.1 cluster
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) if needed,
 then clone this public repository:
@@ -17,6 +17,10 @@ uv run --frozen python preflight.py --device cuda
 uv run --frozen python train.py --device cuda --run-dir runs/cuda-seed0
 ```
 
+Run the preflight and training commands inside your scheduler's GPU allocation.
+To update an existing clone, run `git pull --ff-only` followed by
+`uv sync --locked`; uv replaces the previous PyTorch build in the environment.
+
 On an Apple Silicon Mac, replace `cuda` with `mps`:
 
 ```sh
@@ -25,9 +29,12 @@ caffeinate -i uv run --frozen python train.py --device mps --run-dir runs/mps-se
 ```
 
 `uv` manages Python 3.12, dependencies and the local `.venv`. PyTorch performs
-GPU computation. The lock uses PyTorch 2.15.0 from PyPI, which supplies the
-native Mac build and a CUDA-enabled Linux build. A Linux machine needs an NVIDIA
-driver compatible with that build. Explicit `--device cuda`/`mps` fails if the
+GPU computation. Both training and evaluation lock PyTorch **2.5.1+cu121** on
+Linux, from the explicit official `https://download.pytorch.org/whl/cu121`
+index. The CUDA 12.1 wheel targets Linux x86_64 and includes its CUDA runtime
+dependencies; the node still needs a compatible NVIDIA driver. PyTorch 2.15.0
+does not provide this CUDA 12.1 build, so the PyTorch version is intentionally
+changed. macOS uses PyTorch 2.5.1 from PyPI. Explicit `--device cuda`/`mps` fails if the
 accelerator is unavailable; it never silently falls back to CPU. `--device auto`
 selects CUDA, then MPS, then CPU. The trainer uses one GPU per process.
 
@@ -102,6 +109,11 @@ resume; PyTorch does not promise bitwise reproducibility between CPU and GPU.
 It resumes from the last completed native checkpoint and replays later work,
 without saving a partially applied update. Git ignores all generated checkpoints.
 
+The CUDA 12.1 update changes the package versions and training lock. A run
+created with the old PyTorch 2.15 environment cannot be resumed exactly under
+this environment; retain its original checkout/environment for exact resume,
+or start a new run directory with the CUDA 12.1 environment.
+
 ## Evaluate the pretrained baseline
 
 Evaluation is native and **baseline-only**. It compares the completed pretrained
@@ -164,7 +176,7 @@ checkpoint provenance, and exact CPU optimizer/RNG resume. The preflight uses
 the full original backbone on a small disposable synthetic table and performs
 forward/backward/AdamW. It neither loads nor changes actual WSP weights.
 
-Verified here with uv 0.13.9 and Python 3.12.16: all six tests pass, and the
+Verified here with uv 0.13.9, Python 3.12.16 and PyTorch 2.5.1: all six tests pass, and the
 full-backbone CPU preflight completes successfully. CUDA and MPS are unavailable
 to the editing session, so run the accelerator preflight on your training host.
 Evaluation tests use offline synthetic fixtures and cover incomplete-checkpoint
@@ -173,11 +185,14 @@ All 12 training/evaluation tests pass; the evaluation integration tests use
 offline synthetic fixtures and do not claim a completed CTR23 benchmark run.
 Reference files retain their original bytes, including line endings, through
 Git attributes.
+Linux x86_64 dry-run synchronization of both locked environments selects
+`torch==2.5.1+cu121` and `nvidia-cuda-runtime-cu12==12.1.105`.
 
 ## References
 
 - [nanoTabICL source](https://github.com/soda-inria/nanotabicl/tree/4a7f9c7648f05c3efb34555e088105405a707469)
 - [uv and PyTorch](https://docs.astral.sh/uv/guides/integration/pytorch/)
+- [Official PyTorch 2.5.1 CUDA 12.1 installation](https://pytorch.org/get-started/previous-versions/#v251)
 - [PyTorch MPS](https://docs.pytorch.org/docs/stable/notes/mps.html)
 - [PyTorch reproducibility](https://docs.pytorch.org/docs/stable/notes/randomness.html)
 

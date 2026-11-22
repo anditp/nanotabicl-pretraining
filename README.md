@@ -38,6 +38,13 @@ changed. macOS uses PyTorch 2.5.1 from PyPI. Explicit `--device cuda`/`mps` fail
 accelerator is unavailable; it never silently falls back to CPU. `--device auto`
 selects CUDA, then MPS, then CPU. The trainer uses one GPU per process.
 
+The scientific dependencies are pinned to published releases with Python 3.12
+Linux wheels: NumPy 2.1.3, SciPy 1.14.1, scikit-learn 1.5.2 and pandas 2.2.3.
+Both projects limit dependency resolution to releases published before
+2025-06-01, so regenerating the locks retains an established package snapshot.
+This replaces the original scientific pins copied from the Docker environment;
+package versions are recorded with each training/evaluation run.
+
 Run long jobs in tmux or your cluster's normal job scheduler. `caffeinate`
 prevents Mac idle sleep while its child runs; closing the lid can still stop it.
 

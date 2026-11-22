@@ -21,6 +21,40 @@ Run the preflight and training commands inside your scheduler's GPU allocation.
 To update an existing clone, run `git pull --ff-only` followed by
 `uv sync --locked`; uv replaces the previous PyTorch build in the environment.
 
+### Submit with Slurm
+
+After `uv sync --locked` finishes on the login node, submit from the repository
+root:
+
+```sh
+sbatch train.slurm
+```
+
+`train.slurm` requests one GPU, four CPU cores (matching the trainer's thread
+count), 64 GB of host memory and 24 hours. It runs the CUDA preflight, then
+starts the fixed-budget baseline in `runs/cuda-seed0`. A failed preflight stops
+the job. Output goes to `slurm-nanotabicl-JOB_ID.out` in the repository root.
+The job uses the installed environment without synchronizing dependencies;
+the checkout, `.venv` and uv-managed Python must be accessible on compute nodes,
+and `uv` must be on the job's PATH.
+
+Pass your site's partition/account and any resource overrides to `sbatch`,
+before the script name, for example:
+
+```sh
+sbatch --partition=YOUR_GPU_PARTITION --account=YOUR_ACCOUNT train.slurm
+```
+
+Trainer arguments go after the script name. To resume the last completed
+checkpoint under the same environment:
+
+```sh
+sbatch train.slurm --run-dir runs/cuda-seed0 --resume
+```
+
+Add the same site options to the resume submission when required. The script
+does not submit further jobs automatically.
+
 On an Apple Silicon Mac, replace `cuda` with `mps`:
 
 ```sh

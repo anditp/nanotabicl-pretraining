@@ -7,6 +7,7 @@ baselines/
 checkpoints/
 cache/
 logs/
+slurm-*.out
 *.pt
 *.pth
 *.npy

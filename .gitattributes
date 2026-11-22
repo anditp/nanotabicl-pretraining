@@ -1,0 +1,2 @@
+# Reference checksums require original bytes on every platform.
+/experiment/** -text whitespace=cr-at-eol,-blank-at-eof

@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+runs/
+baselines/
+checkpoints/
+cache/
+logs/
+*.pt
+*.pth
+*.npy
+*.npz
+.env
+.env.*
+
+.tools/

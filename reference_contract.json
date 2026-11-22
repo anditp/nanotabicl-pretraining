@@ -1,0 +1,94 @@
+{
+  "experiment_identity": {
+    "files": {
+      "config.json": "81d79ddfee3b16af9e030a4397fd13742c995f3532a3cf07e29563fd043b27bb",
+      "source/model_config.json": "7e0ba0558897fd569845892f110794db8f2601dd3b1fbb30f99620d0170ad638",
+      "source/model.py": "618d88fd8056aa19482e043f24458c65579e4e718560450aae731662a6077914",
+      "source/interface.py": "387643e555c68beb8304bdaee22c0e84d3329c822f35f0fbddb3bb3dcae31f1a",
+      "pretraining/prior.py": "b64bb260feef0841151178272d5921703c7286e498f92e1654d992fb501c13f3",
+      "benchmarks/ctr23_task_ids.csv": "cb6ff45d4dead984d970903f647b208dd3dd08f8ebfa8aedf1209212e3ed27eb",
+      "benchmarks/ctr23_published_baselines.csv": "3d68cac3c94f898e5df753db33cd7a25bcc568625e5a7d83f002b3520ff7d58d",
+      "common.py": "dcd9fdc7711e04e98a601ab433107615fd2230ac2b9455296cf6a37c31f8393d",
+      "model_runtime.py": "13051a4566c5e7fc520c4ec7be78499648e175ae9ddc99bc9983f35400449bb4",
+      "train_baseline.py": "c85ffa7b3ee0e9a370b30a2f4492ace4fcb24aae8b9099c1a15a2011baac1172",
+      "evaluate.py": "40391d91bb35c294248a55f929c4287bd5a4bf0794406eef68b754635dadf281",
+      "report.py": "31b23ca5a0844d3ad60c576a7062b31605174555666bc445463060705e450864",
+      "prepare.py": "ef72d898b44c9e95129c4059284bc09a9b2af05816b03b2ea3ce64448829a4c5"
+    },
+    "sha256": "29d9d5c6db422c34777bca6f4fa48845c6f614428d36a7cf54893b88017613bf"
+  },
+  "upstream_commit": "4a7f9c7648f05c3efb34555e088105405a707469",
+  "configuration": {
+    "schema_version": 1,
+    "source": {
+      "repository": "soda-inria/nanotabicl",
+      "commit": "4a7f9c7648f05c3efb34555e088105405a707469"
+    },
+    "model": {
+      "max_classes": 0,
+      "out_dim": 1,
+      "embed_dim": 128,
+      "col_num_blocks": 3,
+      "row_num_blocks": 3,
+      "icl_num_blocks": 12,
+      "col_nhead": 8,
+      "row_nhead": 8,
+      "icl_nhead": 8,
+      "feature_group_size": 3,
+      "n_cls_cols": 4,
+      "n_cls_rows": 128
+    },
+    "construction": {
+      "model": "gpt-6-astra",
+      "reasoning": "xhigh",
+      "max_python_runs": 120,
+      "max_turns": 400,
+      "seconds_per_python": 900,
+      "seconds_per_model_call": 14400,
+      "cpu_threads": 8,
+      "memory_gib": 64
+    },
+    "preprocessing": {
+      "target_std_ddof": 0,
+      "target_scale_floor": 1e-08,
+      "constant_target_scale": 1,
+      "unknown_categories": "impute_training_mode",
+      "missing_indicators": "training_missing_only",
+      "all_constant_features": "one_zero_column"
+    },
+    "training": {
+      "steps": 20000,
+      "tables_per_step": 8,
+      "seed": 0,
+      "optimizer": "AdamW",
+      "learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "warmup_steps": 1000,
+      "gradient_clip_norm": 1,
+      "checkpoint_every": 100,
+      "min_context_rows": 32,
+      "max_context_rows": 1024,
+      "query_rows": 128,
+      "min_features": 1,
+      "max_features": 100,
+      "sampling": "log_uniform_integer",
+      "categoricals": "upstream_rand_cat_sizes",
+      "prior": "upstream_rand_dataset_filtered",
+      "threads": 4
+    },
+    "evaluation": {
+      "suite_id": 353,
+      "max_total_rows": 10000,
+      "max_predictors": 100,
+      "resampling": "all_official_repeats_and_folds",
+      "sample": 0,
+      "device": "cpu",
+      "dtype": "float32",
+      "test_batch_size": 256,
+      "aggregate": "arithmetic_mean_of_fold_RMSE_per_dataset",
+      "baseline_comparison": "paired_RMSE_ratios_geometric_mean",
+      "openml_attempts": 5
+    }
+  },
+  "description": "Exact original experiment source identity; native training skips benchmark preparation and uses only synthetic prior data."
+}
